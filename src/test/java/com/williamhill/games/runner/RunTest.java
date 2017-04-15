@@ -34,8 +34,6 @@ public class RunTest {
     @BeforeClass
     public static void setUp(){
         WebDriverExtensionsContext.setDriver(new ChromeDriver());
-//        System.setProperty("username", "ColinBean");
-//        System.setProperty("password", "TestAccount1");
     }
 
     @AfterClass
