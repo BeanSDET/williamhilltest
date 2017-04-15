@@ -64,12 +64,12 @@ public class LoginPopUp extends WebPage {
         type(password, this.password);
     }
 
-    private Map<String,String> getSystemProperies(){
+    private Map<String,String> getSystemProperties(){
         return new HashMap(System.getProperties());
     }
 
     private String getUsernameFromProperties() {
-        if(getSystemProperies().containsKey("username")){
+        if(getSystemProperties().containsKey("username")){
             return System.getProperty("username");
         } else {
             logger.error("username not set " +
@@ -80,7 +80,7 @@ public class LoginPopUp extends WebPage {
     }
 
     private String getPasswordFromProperties() {
-        if(getSystemProperies().containsKey("password")){
+        if(getSystemProperties().containsKey("password")){
             return System.getProperty("password");
         } else {
             logger.error("password not set " +

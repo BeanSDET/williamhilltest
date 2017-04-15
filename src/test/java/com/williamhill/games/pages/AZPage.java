@@ -32,6 +32,9 @@ public class AZPage extends WebPage {
     @FindBy(css = "[data-wf-game-tile=game]")
     List<WebElement> games;
 
+    @FindBy(css = "img[class^='main-image']")
+    List<WebElement> gamesNames;
+
     @Override
     public void open(Object... objects) {
 
@@ -42,7 +45,7 @@ public class AZPage extends WebPage {
         assertCurrentUrlEndsWith("#!/lobby/az");
     }
 
-    public int countGames() throws InterruptedException {
+    public void logCountGames() throws InterruptedException {
         //TODO: implement wait properly, I've tried various JS executors but haven't managed to get it to work
         waitUntil(new Predicate<WebDriver>() {
             @Override
@@ -50,6 +53,8 @@ public class AZPage extends WebPage {
                 return (Boolean) executeJavascript("return document.readyState").equals("complete");
             }
         });
+
+        waitFor(1);
 
         waitUntil(new Predicate<WebDriver>() {
             @Override
@@ -62,6 +67,11 @@ public class AZPage extends WebPage {
                 return startCount==endCount;
             }
         });
-        return games.size();
+        logger.info("Number of games: {}", games.size());
+    }
+
+    public void logGames(){
+        gamesNames.forEach(game ->
+         logger.info("Game Title: {}",  game.getAttribute("alt")));
     }
 }
