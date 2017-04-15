@@ -61,7 +61,7 @@ public class AZPage extends WebPage {
             public boolean test(WebDriver webDriver) {
                 int startCount = driver().findElements(By.cssSelector("[data-wf-game-tile=game]")).size();
                 logger.debug("start count: {}", startCount);
-                waitFor(1);
+                waitFor(2);
                 int endCount = driver().findElements(By.cssSelector("[data-wf-game-tile=game]")).size();
                 logger.debug("end count: {}", endCount);
                 return startCount==endCount;

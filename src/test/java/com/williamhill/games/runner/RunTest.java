@@ -9,6 +9,10 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.time.LocalDateTime;
 
 /**
  * Created by Bean on 12/04/2017.
@@ -19,6 +23,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
         features = "src/test/resources/features",glue={"classpath:com/williamhill/games/stepdefs"})
 
 public class RunTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(RunTest.class);
 
     static {
         // invoke the framework method to set the driver paths as expected.
@@ -33,6 +39,7 @@ public class RunTest {
      */
     @BeforeClass
     public static void setUp(){
+        logger.info("Start time: {}", LocalDateTime.now());
         WebDriverExtensionsContext.setDriver(new ChromeDriver());
     }
 
@@ -40,5 +47,6 @@ public class RunTest {
     public static void tearDown() throws Exception {
         Bot.driver().quit();
         WebDriverExtensionsContext.removeDriver();
+        logger.info("End time: {}", LocalDateTime.now());
     }
 }
